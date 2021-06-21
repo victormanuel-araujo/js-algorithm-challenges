@@ -9,8 +9,8 @@ class Node {
 }
 
 class LinkedList {
-	#head = null;
-	#tail = null;
+	head = null;
+	tail = null;
 	length = 0;
 
 	get(index) {
@@ -24,7 +24,7 @@ class LinkedList {
 		return true;
 	}
 
-	#getHelper(index = 0, currentNode = this.#head, currentIndex = 0) {
+	#getHelper(index = 0, currentNode = this.head, currentIndex = 0) {
 		if (currentIndex === index) return currentNode;
 		return this.#getHelper(index, currentNode.next, currentIndex + 1);
 	}
@@ -48,15 +48,15 @@ class LinkedList {
 	push(value) {
 		const node = new Node(value);
 
-		if (!this.#head) {
-			this.#head = node;
+		if (!this.head) {
+			this.head = node;
 		}
 
-		if (!!this.#tail) {
-			this.#tail.next = node;
+		if (!!this.tail) {
+			this.tail.next = node;
 		}
 
-		this.#tail = node;
+		this.tail = node;
 		this.length++;
 
 		return this;
@@ -65,12 +65,12 @@ class LinkedList {
 	unshift(value) {
 		const newNode = new Node(value);
 
-		if (!this.#head) {
-			this.#tail = newNode;
+		if (!this.head) {
+			this.tail = newNode;
 		}
 
-		newNode.next = this.#head;
-		this.#head = newNode;
+		newNode.next = this.head;
+		this.head = newNode;
 
 		this.length++;
 	}
@@ -91,10 +91,10 @@ class LinkedList {
 	}
 
 	shift() {
-		if (!this.#head) return undefined;
+		if (!this.head) return undefined;
 
-		const currentValue = this.#head;
-		this.#head = this.#head.next;
+		const currentValue = this.head;
+		this.head = this.head.next;
 		this.length--;
 
 		if (this.length === 0) {
@@ -106,9 +106,9 @@ class LinkedList {
 	}
 
 	pop() {
-		if (!this.#head) return undefined;
+		if (!this.head) return undefined;
 
-		let current = this.#head;
+		let current = this.head;
 		let temp;
 
 		while (current.next) {
@@ -122,29 +122,29 @@ class LinkedList {
 			return current;
 		}
 
-		this.#tail = temp;
-		this.#tail.next = null;
+		this.tail = temp;
+		this.tail.next = null;
 
 		return current;
 	}
 
 	reset() {
-		this.#head = null;
-		this.#tail = null;
+		this.head = null;
+		this.tail = null;
 		this.length = 0;
 	}
 
 	reverse() {
 		this.#reverseHelper();
 
-		const temp = this.#head;
-		this.#head = this.#tail;
-		this.#tail = temp;
+		const temp = this.head;
+		this.head = this.tail;
+		this.tail = temp;
 
 		return this;
 	}
 
-	#reverseHelper(currentValue = this.#head, previousValue) {
+	#reverseHelper(currentValue = this.head, previousValue) {
 		const next = currentValue.next;
 		currentValue.next = previousValue;
 
